@@ -1,0 +1,335 @@
+.homepage-hero {
+    select,
+    .ui-autocomplete-input {
+        width: 20em;
+        max-width: 100%;
+    }
+
+    .ui-autocomplete-input {
+        border: none;
+        box-shadow: 0 2px 5px rgba(0,0,0,0.2);
+        background: #f9f9f9 url("/images/homepage-search-icon.png") 0.9em 50% no-repeat;
+        text-indent: 2em;
+
+        @media (-webkit-min-device-pixel-ratio: 1.5), (min-resolution: 144dpi) {
+            background-image: url("/images/homepage-search-icon@2.png");
+            background-size: 20px 20px;
+        }
+
+        &:focus {
+            outline: none;
+            background-color: #fff;
+        }
+    }
+
+    h1, p {
+      text-shadow: 0 2px 20px rgba(0,0,0,0.2);
+    }
+
+    h1 + p {
+      font-size: 1.2em;
+    }
+
+    .container {
+        position: relative;
+        z-index: 2;
+    }
+
+    a {
+        opacity: 1;
+        text-decoration: none;
+        border-bottom: 0.05em solid rgba(255,255,255,0.8);
+        display: inline-block; // move border closer to text
+
+        &:hover,
+        &:focus {
+            border-bottom-color: #fff;
+        }
+    }
+}
+
+.ui-widget {
+    font-family: inherit;
+    font-size: inherit;
+}
+
+.ui-widget-content {
+    border: none;
+    box-shadow: 0 2px 8px rgba(0,0,0,0.2);
+    border-radius: $border_radius;
+    background: #fff;
+}
+
+.ui-menu .ui-menu-item {
+    position: relative;
+    line-height: 1.2em;
+    padding: 0.7em 6em 0.7em 2.66em; // 2.66 = 0.66 input padding + 2em search icon offset
+    border: none;
+    border-bottom: 1px solid $colour_off_white;
+
+    &:first-child {
+        @include border-top-radius($border_radius);
+    }
+
+    &:last-child {
+        @include border-bottom-radius($border_radius);
+        border-bottom: none;
+    }
+
+    &.ui-state-focus {
+        margin: 0;
+        background: $colour_lighter_grey;
+    }
+}
+
+.autocomplete-country__people {
+    position: absolute;
+    right: 1em;
+    top: 50%;
+    margin-top: -0.5em;
+    color: #999;
+    font-size: 0.8em;
+    line-height: 1.2em;
+}
+
+.homepage-map {
+    position: absolute;
+    top: 0;
+    bottom: 0;
+    left: 0;
+    right: 0;
+    z-index: 1;
+    overflow: hidden;
+
+    .jvectormap-container {
+        height: 150%;
+        top: -5em;
+    }
+}
+
+.term-membership-table__title {
+    position: relative;
+    padding: 1em 0;
+
+    @media (min-width: $medium_screen) {
+        text-align: center;
+    }
+
+    h2 {
+        margin-bottom: 0;
+    }
+
+    .button {
+        position: absolute;
+        right: 0;
+        top: 0.5em;
+    }
+}
+
+.party-groupings__title {
+    font-size: 0.875em;
+    margin-bottom: 1.5em;
+
+    @media (min-width: $medium_screen) {
+        text-align: center;
+    }
+
+    h2 {
+        margin-bottom: 0;
+    }
+}
+
+.button--download {
+    @extend .button--tertiary;
+}
+
+.country__legislature {
+    border-bottom: 1px solid $colour_lighter_grey;
+    padding-bottom: 0.5em;
+    margin-bottom: 1em;
+
+    @media (min-height: 600px) {
+        padding-bottom: 1.5em;
+        margin-bottom: 2em;
+    }
+
+    & > :last-child {
+        margin-bottom: 0;
+    }
+}
+
+.country__legislature__header {
+    @include clearfix();
+
+    h3 {
+        float: left;
+    }
+
+    .button {
+        float: right;
+        margin-top: -0.3em; // visually align with heading
+    }
+}
+
+// My kingdom for a parent selector in CSS!
+// Add some extra margin above the promo section because the screencast
+// sticks out and it feels a bit tight against the previous section.
+.page-section--gender-balance-promo {
+    @media (min-width: $medium_screen) {
+        margin-top: 2em;
+        padding: 3em 0;
+    }
+}
+
+.gender-balance-promo {
+    @media (min-width: $medium_screen) {
+        position: relative; // positioning context for the demo gif
+        padding-left: 340px; // make space for the demo gif
+        max-width: 44em; // avoid silly long lines
+        margin: 0 auto; // centred when the window is wide
+    }
+
+    p {
+        margin-bottom: 0; // avoid extra space after last paragraph
+    }
+
+    p + p {
+        margin-top: 1em;
+    }
+}
+
+.gender-balance-promo__demo {
+    display: block; // because it's actually an <a> element
+    position: relative;
+    bottom: -2em; // counteract padding-bottom on .page-section
+
+    @media (min-width: $medium_screen) {
+        position: absolute;
+        left: 0;
+        bottom: -3em;
+    }
+}
+
+.screenshot-wrapper {
+    background: transparent url(/images/iphone.png) 0 0 no-repeat;
+    padding: 70px 24px 0 24px;
+    margin: 0 auto;
+    width: 280px;
+
+    img {
+        width: 232px;
+        height: 330px;
+        vertical-align: bottom;
+    }
+}
+
+.url-demo-box {
+    border:1px solid #ccc;
+    padding:1em;
+    font-size:120%;
+    line-height:1.4
+}
+.process-boxes div{
+  padding:1em;
+  border-radius:0.25em;
+  margin:0.5em;
+  width:66%;
+  font-weight:bold;
+  p {
+    margin: 0.25em 1em;
+    font-weight:normal;
+  }
+  &.step-0 {
+    background-color:#ffbbbb;
+    margin-top: 1em;
+  }
+  &.step-1 {
+    background-color:#ffffbb;
+  }
+  &.step-2 {
+    background-color:#bbffbb;
+    margin-bottom: 1em;
+  }
+}
+
+.section-intro {
+  font-size: 1.1875em;
+  color: #333;
+  border-bottom: 1px solid #ddd;
+  padding-bottom: 1em;
+  margin-bottom: 1.2em;
+  margin-top: 1em;
+}
+
+.country-list__section-header {
+    border-bottom: 1px solid $colour_light_grey;
+    padding-bottom: 0.5em;
+    margin: 2em 0 0.5em 0;
+}
+
+.fourohfour-suggestions {
+    margin-top: 2em;
+}
+
+.fourohfour-suggestions__or {
+    margin: 0 1em;
+}
+
+.url-part-domain {
+    background-color: #ddffdd;
+    color: #000; // because sometimes it's in a link
+    border:2px solid #009900;
+    padding: 0.1em;
+}
+.url-part-sha {
+    background-color: #ffdddd;
+    border:2px solid #990000;
+    padding: 0.1em;
+}
+.url-part-file {
+    background-color: #ddddff;
+    border:2px solid #000099;
+    padding: 0.1em;
+}
+.url-part-file-alt {
+    background-color: #ffffdd;
+    border:2px solid #999900;
+    padding: 0.1em;
+}
+
+/* used to show nested data structure in data_summary.erb */
+.nested-boxes {
+  margin-bottom:1em;
+  div {
+    padding: 0.5em 1em;
+    background: white;
+    font-family: inherit;
+    &.odd-nest {
+      background: #ddd;
+    }
+  }
+}
+
+/* used to show data definitions in data_summary.erb */
+table.definition {
+  th, td {
+    font-size: 1.125em;
+  }
+  th {
+    font-weight: normal;
+    font-family: monospace;
+    text-align: left;
+  }
+  tr:nth-of-type(odd) {
+    background-color:#eee;
+  }
+}
+
+.superscript {
+    font-size: .83em;
+    line-height: 0.5em;
+    vertical-align: baseline;
+    position: relative;
+    top: -0.4em;
+}
+
