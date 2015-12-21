@@ -117,11 +117,11 @@ require 'open-uri/cached'
   tags within that. This is isolated with a single call to nokogiri:
 </p>
 <pre><code>def scrape_list(url)
-noko = noko_for(url)
-<strong>noko.css('.mod-inner li a')</strong>.each do |a|
-mp_url = URI.join url, a.attr('href')
-scrape_person(a.text, mp_url)
-end
+  noko = noko_for(url)
+  <strong>noko.css('.mod-inner li a')</strong>.each do |a|
+    mp_url = URI.join url, a.attr('href')
+    scrape_person(a.text, mp_url)
+  end
 end</code></pre>
 <p>
   The data is collected in an hash called <code>data</code>, which is
@@ -132,15 +132,15 @@ end</code></pre>
   we construct it from the URL:
 </p>
 <pre><code>def scrape_person(name, url)
-noko = noko_for(url)
-data = {
-id: url.to_s.split("/").last,
-name: name.sub('Senator ', ''),
-image: noko.css('img[src*="/Senators/"]/@src').text,
-source: url.to_s,
-}
-data[:image] = URI.join(url, data[:image]).to_s unless data[:image].to_s.empty?
-ScraperWiki.save_sqlite([:id], data)
+  noko = noko_for(url)
+  data = {
+    id: url.to_s.split("/").last,
+    name: name.sub('Senator ', ''),
+    image: noko.css('img[src*="/Senators/"]/@src').text,
+    source: url.to_s,
+  }
+  data[:image] = URI.join(url, data[:image]).to_s unless data[:image].to_s.empty?
+  ScraperWiki.save_sqlite([:id], data)
 end
 </code></pre>
 
