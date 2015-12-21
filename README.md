@@ -1,4 +1,4 @@
-# EveryPolitician Documentation
+# EveryPolitician Documentation [![Build Status](https://travis-ci.org/everypolitician/everypolitician-docs.svg?branch=run-html-proofer-on-travis)](https://travis-ci.org/everypolitician/everypolitician-docs)
 
 This is the source code for http://docs.everypolitician.org.
 
