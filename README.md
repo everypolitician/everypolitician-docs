@@ -11,15 +11,15 @@ Get the code from GitHub
     $ git clone https://github.com/everypolitician/everypolitician-docs
     $ cd everypolitician-docs
 
-[Install Jekyll](http://jekyllrb.com/docs/installation/).
+Install the dependencies with Bundler:
 
-    $ gem install jekyll
+    $ bundle install
 
 ## Usage
 
-Once you've installed Jekyll you can start a server
+Once you've installed the dependencies you can start a server
 
-    $ jekyll serve -w
+    $ bundle exec jekyll serve -w
 
 This will start a webserver running at <http://localhost:4000>.
 
