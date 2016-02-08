@@ -7,41 +7,44 @@ Where did this data come from?
 </h1>
 
 <p class="section-intro">
-  <em>Short answer</em>: we combine data from any useful online sources
-  you can tell us about, official and unofficial.
-  <br>
+  <em>Short answer</em>: we combine data from as many useful online sources
+  as you can tell us about, official and unofficial.
   <em>Longer (technical) answer</em>: if you’re happy to read code, you can look in
-  the file <code>instructions.json</code> for the complete details — see
-  <a href="#instructions-json">more about this below</a>.
+  the file <code>instructions.json</code> that EveryPolitician uses to retrieve
+  and collate the data — see <a href="#instructions-json">more about this below</a>.
 </p>
 <p>
   We list the sources we’re using at the bottom of each term’s page
-  (for example, see “Main sources” right at the bottom of 
-  <a href="http://everypolitician.org/kenya/assembly/term-table/11.html">Kenya’s National Assembly’s 11th term</a>).
+  (for example, see “Main sources” right at the bottom of the data for the
+  <a href="http://everypolitician.org/australia/representatives/term-table/44.html">44th&nbsp;term</a>
+  of Australia’s House of Representatives).
 </p>
 <p>
-  We rebuild the data from those sources whenever we know the data in them
-  has itself changed.
+  Sometimes the data changes, of course. So we regularly rebuild the data from
+  those sources to keep EveryPolitician up to date.
 </p>
-
 
 <h2>About those sources</h2>
 
 <p>
-  We aggregate from lots of difference online sources: official parliament sites,
-  unofficial sites (including wikipedia’s <a href="https://www.wikidata.org">WikiData</a>).
+  We aggregate from lots of difference online sources, such as official
+  parliament sites and unofficial sites (including <a
+  href="https://www.wikidata.org">Wikidata</a>, which is the database on which
+  projects like Wikipedia are based).
   <!-- FIXME: more about how this works-->
   If you know of a good source that we’re not using:
   <a href="/contribute.html">let us know</a>!
 </p>
 <p>
-  We merge our data from multiple sources because this isn’t a straightforward
-  problem: a data source might be very reliable, but not timely. It might be
-  up-to-date and reliable, but not include dates of birth, which another source
-  does have. Unofficial sites might be less authoritative but are often more
-  timely or complete. The fact is that no country has a single, authoritative
-  source which is complete and up-to-date, which is the primary reason we
-  created EveryPolitician project in the first place.
+  We merge our data from multiple sources because it's common for different
+  sources provide different kinds of data (for example, one source might have
+  politicians' dates of birth, while another has their Twitter handles).
+</p>
+<p>
+  If any of the sources themselves have clear, consistent IDs, we try to
+  capture those (and include them in the <code>identifiers</code> field within
+  the JSON), because we know that sometimes it can be helpful to be able to map
+  back to the original data sets.
 </p>
 <p>
   The data sources available vary immensely from country to country. And the
@@ -55,28 +58,32 @@ Where did this data come from?
 <a name="instructions-json"></a>
 <h2 id="the_technical_details">The technical details</h2>
 <p>
-  You can see <em>exactly</em> where the data’s coming from by looking in the
-  <a href="https://github.com/everypolitician/everypolitician-data/">EveryPolitician data repo</a>.
-  Specifically, you want the <code>sources</code> directory for the legislature
-  you’re interested in. Look inside the <code>instructions.json</code> there
-  because that is the file EveryPolitician uses to rebuild its data whenever
-  something changes.
+  You can see exactly where the data’s coming from by looking in the
+  <a href="https://github.com/everypolitician/everypolitician-data/">EveryPolitician
+  data repo</a>. Specifically, you want the <code>sources</code> directory for
+  the legislature you’re interested in. Look inside the
+  <code>instructions.json</code> there because that is the file EveryPolitician
+  uses to rebuild its data whenever something changes.
 </p>
 <p>
   For example, the instructions (containing the explicit sources as well as
   indications of how to process them) that EveryPolitician follows for putting
-  together its data for Kenya’s Assembly are in this
-  <a href="https://github.com/everypolitician/everypolitician-data/blob/master/data/Kenya/Assembly/sources/instructions.json"><code>instructions.json</code> file</a>.
+  together its data for Australia’s House of Representatives are in this
+  <a href="https://github.com/everypolitician/everypolitician-data/blob/master/data/Australia/Representatives/sources/instructions.json"><code>instructions.json</code> file</a>.
 </p>
 <p>
   Amongst other things, that file tells you the <em>type</em> of data it’s
   getting as well as URL of the <em>resource</em>. It’s common for the resource
   itself to be the output of a process that is getting data from the “raw”
-  source — for example, in the case of Kenya, two of the sources (one for
-  determining the terms available, and another for the politicians’ names)
-  are the output of a single webscraper that’s running here:
-  <a href="https://morph.io/tmtmtmtm/kenya-mzalendo">morph.io/tmtmtmtm/kenya-mzalendo</a>.
-  That scraper itself is getting data from the 
-  <a href="http://info.mzalendo.com">Mzalendo website</a>, which you can see by looking at
-  <a href="https://github.com/tmtmtmtm/kenya-mzalendo/blob/master/scraper.rb#L75">the scraper code</a>.
+  source — for example, in the case of Australia,  two of the sources
+  (<a href="https://github.com/everypolitician/everypolitician-data/blob/master/data/Australia/Representatives/sources/instructions.json#L3-L9">one</a>
+  for determining the terms available, and
+  <a href="https://github.com/everypolitician/everypolitician-data/blob/master/data/Australia/Representatives/sources/instructions.json#L78-L86">another</a>
+  for the politicians’ names) are the output of a single webscraper running
+  here:
+  <code><a href="https://morph.io/tmtmtmtm/australia-openaustralia">morph.io/tmtmtmtm/australia-openaustralia</a></code>.
+  If you look at
+  <a href="https://github.com/tmtmtmtm/australia-openaustralia/blob/master/scraper.rb#L102-L106">the scraper's source code</a>,
+  you can see that the scraper itself is getting data from
+  <a href="http://data.openaustralia.org/members/">OpenAustralia's data site</a>.
 </p>
