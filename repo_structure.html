@@ -4,107 +4,54 @@ layout: docs
 
 <h1> Getting the most recent data </h1>
 <p class="section-intro">
-  If you just browse the site, you’ll find that EveryPolitician links to
+  If you just browse the site, you’ll find that EveryPolitician simply links to
   the most recently updated version of its data files.
 </p>
 <p>
-  But if you’re accessing the data programmatically, that might not work
-  nicely for you because the data is hosted on GitHub, which doesn’t
-  serve the right Content-type when your application fetches the data.
-  Instead, <a href="use_the_data.html#rawgit">you should get it from
-  <code>cdn.rawgit.com</code></a> (while you’re there, you should also read
-  our notes on <a href="use_the_data.html">using the data</a> in
-  general). To do that you’ll need to know the URL of the most recent
-  data &mdash; and that means determining the SHA of the git commit
-  that put it there. You get that SHA from the current
-  <code>countries.json</code>, as shown below.
+  But if you’re accessing the data programmatically, that might not work nicely
+  for you because the data is hosted on GitHub, which doesn’t serve the right
+  Content-type when your application fetches the data. Instead, <a
+  href="use_the_data.html#rawgit">you should get it from
+  <code>cdn.rawgit.com</code></a> (while you’re there, you should also read our
+  notes on <a href="use_the_data.html">using the data</a> in general).
+</p>
+<p>
+  <strong>In summary</strong>:
+  get the latest data file URLs from the 
+  <code>popolo_url</code> and <code>csv_url</code> fields within
+  <code>countries.json</code>.
+</p>
+<h2>
+  The details
+</h2>
+<p>
+  EveryPolitician data is frequently updated. Typically you'll be interested in
+  the most recent data, but if you need to get old versions you can. This is
+  because all the files are being stored in git.
+</p>
+<p>
+  This means that every time we change the data, that change is given a unique
+  code (called a hash, which looks something like <code>0b47c0c</code>). You
+  can use this code to uniquely refer to the files as they were at that moment.
+</p>  
+<p>
+  If you're familiar with git or GitHub, this will seem like second nature. But
+  if you're not, all you really need to know is that the URLs to the data
+  always have such a hash in them. This means that EveryPolitician data URLs
+  are really pointing at a <em>snapshot</em> of the data.
+</p>
+<p>
+  So if you want to get the <em>most recent version</em> of the data, make sure
+  you're using the latest hash in the URL. We put the data URLs in
+  <code>countries.json</code>, as shown below. So to get the most
+  recent data programmatically, you need to look in the current version of
+  <code>countries.json</code> —
+  possibly also inspecting the value of the <code>lastmod</code> field (which
+  contains the <abbr
+  title="number of seconds that have elapsed since January 1, 1970">Unix epoch</abbr>
+  time of the last time the data was updated) for the legislature you're interested in.
 </p>
 
-<h3>
-  Example URLs
-</h3>
-<p>
-  This is what an EveryPolitician data URL looks like:
-</p>
-<p class="url-demo-box">
-  <code><span class="url-part-domain">https://<em>domain</em></span><br>
-  &nbsp;&nbsp;
-  /everypolitician/everypolitician-data<br>
-  &nbsp;&nbsp;
-  /<span class="url-part-sha">commit-SHA</span><br>
-  &nbsp;&nbsp;
-  /<span class="url-part-file">path-to-data-file</span></code>
-</p>
-<p>
-  You might expect the domain to be <code>https://github.com/</code>, but for
-  your application <a href="/use_the_data.html#rawgit">we recommend you use <code><span class="url-part-domain">https://cdn.rawgit.com</span></code></a>.
-</p>
-<p>
-  Wherever you’re getting <code>countries.json</code> from, the <code>data/</code> directory
-  will be a sibling of that.
-</p>
-<p>
-  For example: the URLs for the most recent (at time of writing — and
-  that’s <em>already out of date</em>, which neatly demonstrates
-  why you need to know how to determine these SHAs) politicians’
-  data for the UK’s House of Commons legislature, for the 56th term
-  (which started 2015-05-08), look like this:
-</p>
-<ul>
-  <li>
-    JSON: <a style="font-size:80%;padding-left:0.5em" href="https://cdn.rawgit.com/everypolitician/everypolitician-data/0b47c0c/data/UK/Commons/ep-popolo-v1.0.json">try it</a>
-    <br>
-    <code><span span class="url-part-domain">https://cdn.rawgit.com</span>/everypolitician/everypolitician-data/<span span class="url-part-sha">0b47c0c</span>/<span class="url-part-file">data/UK/Commons/ep-popolo-v1.0.json</span></code>
-  </li>
-</ul>
-<ul>
-  <li>
-    CSV for the term &ldquo;56th Parliament of the United Kingdom&rdquo;:
-    <a style="font-size:80%;padding-left:0.5em" href="https://cdn.rawgit.com/everypolitician/everypolitician-data/0b47c0c/data/UK/Commons/term-56.csv">try it</a>
-    <br>
-    <code><span class="url-part-domain">https://cdn.rawgit.com</span>/everypolitician/everypolitician-data</span>/<span class="url-part-sha">0b47c0c</span>/<span class="url-part-file-alt">data/UK/Commons/term-56.csv</span></code>
-  </li>
-</ul>
-<p>
-  ...because the <code>countries.json</code> contained this:
-</p>
-<pre>
-{
-"name": "United Kingdom",
-"country": "United Kingdom",
-"code": "GB",
-"slug": "UK",
-"legislatures": [
-{
-"name": "House of Commons",
-"slug": "Commons",
-"sources_directory": "data/UK/Commons/sources",
-"<strong>popolo</strong>": "<span class="url-part-file">data/UK/Commons/ep-popolo-v1.0.json</span>",
-"lastmod": "1445087100",
-"person_count": 1337,
-"<strong>sha</strong>": "<span class="url-part-sha">0b47c0c</span>",
-"legislative_periods": [
-{
-  "id": "term/56",
-  "name": "56th Parliament of the United Kingdom",
-  "start_date": "2015-05-08",
-  "wikidata": "Q21084473",
-  "slug": "56",
-  "<strong>csv</strong>": "<span class="url-part-file-alt">data/UK/Commons/term-56.csv</span>"
-},
-{
-  "id": "term/55",
-  "name": "55th Parliament of the United Kingdom",
-  "start_date": "2010-05-06",
-  "end_date": "2015-03-30",
-  ...
-},
-...
-]
-}
-]
-}
-</pre>
 <h3>
   Explaining <code>countries.json</code>
 </h3>
@@ -112,7 +59,8 @@ layout: docs
   EveryPolitician publishes a list in JSON format of
   all the countries we have data for:
   <a href="https://raw.githubusercontent.com/everypolitician/everypolitician-data/master/countries.json"><code>countries.json</code></a>.
-  This file includes metadata about what’s available to download.
+  This file includes metadata about what’s available to download, including the
+  URLs to use.
 </p>
 <p>
   Key fields that <code>countries.json</code> has for each country include:
@@ -152,6 +100,10 @@ layout: docs
 </p>
 <ul>
   <li>
+    <code>popolo_url</code>:
+    the fully-qualified URL to the Popolo JSON file
+  </li>
+  <li>
     <code>popolo</code>:
     the path to the Popolo JSON file
   </li>
@@ -160,18 +112,69 @@ layout: docs
     Unix time when the data was last modified
   </li>
   <li>
-    <code>sha</code>:
-    git’s hash for the commit in which the data was last modified (see following section)
-  </li>
-  <li>
     <code>legislative_periods</code>:
     a list of each of the terms, or periods. Each one of those has these fields:
     <ul>
       <li><code>id</code>, <code>name</code>, <code>start_date</code>, and <code>slug</code></li>
       <li>
-        and also a path (from the directory containing <code>countries.json</code>) to the CSV file containing the data for this term of this legislature
-        (for example, <code>data/Bangladesh/House/term-10.csv</code>)
+        <code>csv_url</code>:
+        the fully-qualified URL to the CSV file of data for this term
       </li>
     </ul>
   </li>
 </ul>
+
+<h3>
+  Data URLs: <code>popolo_url</code> and <code>csv_url</code>
+</h3>
+<p>
+  The <code>countries.json</code> file contains the path and the URL of two types
+  of data file:
+</p>
+<ul>
+  <li>
+    <code>popolo_url</code> — the Popolo JSON data for the whole legislature
+  </li>
+  <li>
+    <code>csv_url</code> — the comma-separated data for individual terms within the legislature
+  </li>
+</ul>
+<p>
+  This is what an EveryPolitician data URL looks like:
+</p>
+<p class="url-demo-box">
+  <code><span class="url-part-domain">https://<em>domain</em></span><br>
+  &nbsp;&nbsp;
+  /everypolitician/everypolitician-data<br>
+  &nbsp;&nbsp;
+  /<span class="url-part-sha">commit-SHA</span><br>
+  &nbsp;&nbsp;
+  /<span class="url-part-file">path-to-data-file</span></code>
+</p>
+<p>
+  You might expect the domain to be <code>https://github.com/</code>, but for
+  your application <a href="/use_the_data.html#rawgit">we recommend you use <code><span class="url-part-domain">https://cdn.rawgit.com</span></code></a>.
+</p>
+<p>
+  For example: the URLs for the most recent (at time of writing — and
+  that’s <em>already out of date</em>, which neatly demonstrates
+  why you need to know how to determine these SHAs) politicians’
+  data for the UK’s House of Commons legislature, for the 56th term
+  (which started 2015-05-08), look like this:
+</p>
+<ul>
+  <li>
+    JSON: <a style="font-size:80%;padding-left:0.5em" href="https://cdn.rawgit.com/everypolitician/everypolitician-data/0b47c0c/data/UK/Commons/ep-popolo-v1.0.json">try it</a>
+    <br>
+    <code><span span class="url-part-domain">https://cdn.rawgit.com</span>/everypolitician/everypolitician-data/<span span class="url-part-sha">0b47c0c</span>/<span class="url-part-file">data/UK/Commons/ep-popolo-v1.0.json</span></code>
+  </li>
+</ul>
+<ul>
+  <li>
+    CSV for the term &ldquo;56th Parliament of the United Kingdom&rdquo;:
+    <a style="font-size:80%;padding-left:0.5em" href="https://cdn.rawgit.com/everypolitician/everypolitician-data/0b47c0c/data/UK/Commons/term-56.csv">try it</a>
+    <br>
+    <code><span class="url-part-domain">https://cdn.rawgit.com</span>/everypolitician/everypolitician-data</span>/<span class="url-part-sha">0b47c0c</span>/<span class="url-part-file-alt">data/UK/Commons/term-56.csv</span></code>
+  </li>
+</ul>
+

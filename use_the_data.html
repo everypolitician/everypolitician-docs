@@ -37,8 +37,8 @@ layout: docs
   one for every country we’ve got data for. These contain identifying
   fields (like name and country code) as well as metadata for each
   legislature within those countries. From <code>countries.json</code>
-  you can <a href="repo_structure.html">construct the URLs</a> of the
-  files that contain the data you want.
+  you can <a href="repo_structure.html">get the URLs of the
+  data files</a>  you want.
 </p>
 <p>
   Every time we change any of the data, we update
@@ -198,20 +198,7 @@ layout: docs
   This works because those files are static. And they’re static because
   every RawGit URL must have a commit SHA in it — that is, you’re
   explicitly referring to a specific file in EveryPolitician’s repo.
-  Remember <code>countries.json</code>? That’s why we put the
-  <em>latest commit SHA</em> in there.
+  Remember <code>countries.json</code>? That’s why you should
+  <a href="repo_structure.html">get their URLs</a> from that file.
 </p>
-<h3>
-  Use <code>countries.json</code> to construct the latest data URLs
-</h3>
-<p>
-  So, when you’re grabbing data programmatically from EveryPolitician,
-  the right way to do it is to construct a URL for the
-  <code>cdn.rawgit.com</code> domain using the SHA and path information
-  that’s in <code>countries.json</code>.
-</p>
-<div class="process-boxes">
-  <div class="step-1">
-    <a href="repo_structure.html">Here’s how to construct the URL</a>
-  </div>
 </div>
