@@ -1,0 +1,195 @@
+---
+layout: docs
+---
+
+<h1>EveryPolitician bot</h1>
+
+<p class="lead">
+  Our little bot works tirelessly collating the EveryPolitician data and
+  keeping it up to date.
+</p>
+
+<img src="images/everypoliticianbot-icon.png">
+<p>
+  OK, so in fact it’s not really a robot, and it doesn’t look like this.
+  Nonetheless, if you’re interested in the some of the implementation and
+  design details behind the project, we think the bot’s point-of-view might be
+  a good way to explain things.
+</p>
+
+<ul>
+  <li>
+    the bot’s home is
+    <a href="https://github.com/everypoliticianbot">everypoliticianbot@GitHub</a>
+  </li>
+  <li>
+    the bot’s blog is
+    <a href="https://medium.com/@everypolitician">on Medium</a>
+  </li>
+  <li>
+    the bot tweets as
+    <a href="https://twitter.com/everypolitbot"> @everypolitbot</a>
+  </li>
+</ul>
+
+<h2>Blog posts</h2>
+
+<ul class="unstyled-list">
+<li>
+  <!-- 2016-04-21 --> 
+  <a class="link--epbot" href="https://www.mysociety.org/2016/04/21/introducing-everypoliticians-bot/">Introducing the bot</a>
+  <p>
+    An introduction to the bot (on mySociety’s blog).
+  </p>
+</li>
+
+<li>
+  <!-- 2016-04-18 --> 
+  <a class="link--epbot" href="https://medium.com/@everypolitician/i-am-a-busy-bot-d14fc64a5f6f">I am a busy bot</a>
+  <p>
+    The bot makes <em>lots</em> of commits and pull requests, triggered by webhooks.
+  </p>
+</li>
+<li>
+  <!-- 2016-04-19 --> 
+  <a class="link--epbot" href="https://medium.com/@everypolitician/i-m-a-bot-who-comments-d1d93b6cab63">I&#8217;m a bot who comments</a>
+  <p>
+    We use the bot to inspect pull requests and add summaries to them as comments.
+  </p>
+</li>
+<li>
+  <!-- 2016-04-20 --> 
+  <a class="link--epbot" href="https://medium.com/@everypolitician/i-make-lists-of-humans-names-4b061212baf3">I make lists of humans’ names</a>
+  <p>
+    About <code>names.csv</code>, and an example of an app being kept up-to-date by using EveryPolitician
+    webhooks.
+  </p>
+</li>
+<li>
+  <!-- 2016-04-21 --> 
+  <a class="link--epbot" href="https://medium.com/@everypolitician/getting-busy-with-scraper-data-957a2ddd9963">Getting busy with scraper data</a>
+  <p>
+    How the data gets from multiple scrapers into the EveryPolitician data repo.
+  </p>
+</li>
+<li>
+  <!-- 2016-04-22 --> 
+  <a class="link--epbot" href="https://medium.com/@everypolitician/i-am-a-pull-request-terminator-55c47d22990a">I am a (pull request) terminator</a>
+  <p>
+    When the bot generates a new data pull request, it automatically tidies up previous ones.
+  </p>
+</li>
+<li>
+  <!-- 2016-04-25 --> 
+  <a class="link--epbot" href="https://medium.com/@everypolitician/i-keep-the-index-up-to-date-a147b4c0dac2">I keep the index up to date</a>
+  <p>
+    How we use GitHub webhooks to add SHAs to <code>countries.json</code>, keeping it timely.
+  </p>
+</li>
+<li>
+  <!-- 2016-04-26 --> 
+  <a class="link--epbot" href="https://medium.com/@everypolitician/i-webhooks-pass-it-on-703e35e9ee93">I ❤ webhooks: pass it on</a>
+  <p>
+    We’ll make a POST request to your URL whenever the EveryPolitician data changes.
+  </p>
+</li>
+<li>
+  <!-- 2016-04-27 -->
+  <a class="link--epbot" href="https://medium.com/@everypolitician/how-i-build-the-everypolitician-website-6fd581867d10">How I build the EveryPolitician website</a>
+  <p>
+    The bot makes EveryPolitician’s (static) website by spinning up a dynamic one and spidering its pages into <code>gh-pages</code>.
+  </p>
+</li>
+<li>
+  <!-- 2016-04-28 --> 
+  <a class="link--epbot" href="https://medium.com/@everypolitician/i-get-versioned-deploy-logs-for-free-da631b9d4d66">I get versioned deploy logs for free</a>
+  <p>
+    A simple benefit from using GitHub Pages to host the EveryPolitician website.
+  </p>
+</li>
+<li>
+  <!-- 2016-04-29 -->
+  <a class="link--epbot" href="https://medium.com/@everypolitician/i-let-humans-peek-into-the-future-f4fe09eba59c">I let humans peek into the future</a>
+  <p>
+   The bot detects each new data pull request, and spins up a preview site on Heroku showing how it will look.
+  </p>
+</li>
+<li>
+  <!-- 2016-05-03 -->
+  <a class="link--epbot" href="https://medium.com/@everypolitician/i-let-humans-peer-into-the-past-1e80b7f727d">I let humans peer into the past</a>
+  <p>
+    The same mechanism for previewing and building the live site lets us look at old commits too.
+  </p>
+</li>
+<li>
+  <!-- 2016-05-04 -->
+  <a class="link--epbot" href="https://medium.com/@everypolitician/im-a-well-behaved-friend-of-the-octokit-f93c0a90edd2">I&#8217;m a well-behaved friend of the Octokit</a>
+  <p>
+    Using GitHub’s library wrappers to access the GitHub API.
+  </p>
+</li>
+<li>
+  <!-- 2016-05-05 -->
+  <a class="link--epbot" href="https://medium.com/@everypolitician/im-the-good-kind-of-terminator-38d8d0cd815c">I&#8217;m the good kind of terminator</a>
+  <p>
+    We reprogrammed to bot to stop it closing pull requests that humans are working on.
+  </p>
+</li>
+<li>
+  <!-- 2016-05-06 -->
+  <a class="link--epbot" href="https://medium.com/@everypolitician/i-have-busy-days-8c41dd38989">I have busy days</a>
+  <p>
+    The bot really can make a lot of commits and pull requests.
+  </p>
+</li>
+<li>
+  <!-- 2016-05-09 -->
+  <a class="link--epbot" href="https://medium.com/@everypolitician/sometimes-i-work-hard-to-produce-nothing-400762d252ff">Sometimes I work hard to produce nothing</a>
+  <p>
+    Using git as a data store, and how it’s OK that we rebuild the data just to determine nothing’s changed.
+  </p>
+</li>
+<li>
+  <!-- 2016-05-10 -->
+  <a class="link--epbot" href="https://medium.com/@everypolitician/how-i-avoid-the-identity-crisis-aff42b65c18a">How I avoid the identity crisis</a>
+  <p>
+    EveryPolitician adds its own UUIDs, but also retains useful IDs from external sources.
+  </p>
+</li>
+<li>
+  <!-- 2016-05-11 -->
+  <a class="link--epbot" href="https://medium.com/@everypolitician/i-let-humans-have-the-final-word-45ca8efc807f">I let humans have the final word</a>
+  <p>
+    Although the data pull requests are usually prepared by the bot, a human decides whether or not to merge them.
+  </p>
+</li>
+<li>
+  <!-- 2016-05-13 -->
+  <a class="link--epbot" href="https://medium.com/@everypolitician/i-use-wikidata-for-multilingual-names-d35b331f1a59">I use Wikidata for multilingual names</a>
+  <p>
+    Wikidata is a wonderful, always-updating source of international transliterations.
+  </p>
+</li>
+<li>
+  <!-- 2016-05-17 -->
+  <a class="link--epbot" href="https://medium.com/@everypolitician/i-merge-multiple-sources-1fa3ff9eb21c">I merge multiple sources</a>
+  <p>
+    The bot merges multiple sources into a single set of data for every legislature.
+  </p>
+</li>
+<li>
+  <!-- 2016-05-19 -->
+  <a class="link--epbot" href="https://medium.com/@everypolitician/i-work-the-full-multi-bot-24-hour-shift-2fc1f742b103">I work the full multi-bot 24-hour shift</a>
+  <p>
+    A look at the event-driven nature of the EveryPolitician system.
+  </p>
+</li>
+<li>
+  <!-- 2016-05-24 -->
+  <a class="link--epbot" href="https://medium.com/@everypolitician/i-import-data-in-csv-format-482a1ad2d96a">I import data in CSV format</a>
+  <p>
+    We needed to import CSVs because people use spreadsheets, and we use the same simple format for more complex imports too.
+  </p>
+</li>
+</ul>
+

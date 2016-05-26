@@ -333,3 +333,13 @@ table.definition {
     top: -0.4em;
 }
 
+/* used to prettify/distinguish bot links */
+.link--epbot {
+    padding-right: 1.5em;
+    background-image: url(/images/everypoliticianbot-icon.png);
+    background-position: right center;
+    background-size: contain;
+    background-repeat: no-repeat;
+}
+
+
