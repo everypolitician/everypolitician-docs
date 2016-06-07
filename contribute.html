@@ -5,47 +5,149 @@ layout: docs
 <h1>We need your help</h1>
 
 <p class="section-intro">
-  EveryPolitician is an ambitious project. If we’re to succeed in our
-  aim of collecting and sharing data on every elected official in the
-  entire world, we need help from people like you.
+  We’re always looking for new sources of data. If you know where
+  to get data we’re missing for politicians in your country, please
+  help!
+</p>
+
+<p>
+  Right now, we’re concentrating on making sure we have current data on the
+  national legislatures for every country in the world. If you know of a good
+  source of data that we seem to be missing, please
+  <a href="mailto:team@everypolitician.org">let us know</a>. 
+</p>
+<h2>How to contribute</h2>
+<p>
+  In summary, if you:
+</p>
+<ul>
+  <li>
+    know where there’s a source of data we’re currently lacking
+  </li>
+  <li>
+    have some or all of the data we’re looking for, or can put us in
+    touch with a group who has it, or even just know where we can find
+    it in a reasonably well-structured form
+  </li>
+  <li>
+    or want to write a scraper that converts data from such a source
+    into the <a href="submitting.html">simple CSV format</a> we prefer to import
+  </li>
+</ul>
+<p>
+  ...then please send an email to
+  <a
+  href="mailto:team@everypolitician.org">team@everypolitician.org</a>
+  and tell us!
 </p>
 <p>
-  Right now, we’re concentrating on making sure we have current data on
-  the national legislatures for every country in the world.
+  Here’s more about what we’re looking for, and how you can help.
 </p>
-<h2>If your country is missing</h2>
+
+<h3> What’s the problem? </h3>
+<p>
+  EveryPolitician’s data is built by collating data from multiple online
+  sources into a single collection. Those sources can be hard to find,
+  especially in countries where enthusiasm for open data is low, or politicians
+  don’t expect to be held to account. We know that we can’t find all these
+  sources ourselves. We benefit from local people pointing out good sources
+  where they exist.
+</p>
+<p>
+  We want <em>sources</em> rather than raw data, because once we have a source
+  we continue to monitor it, picking up changes and corrections. The
+  EveryPolitician data is not static: it’s constantly being updated.
+</p>
+<p>
+  We’ve managed to collect <em>some</em> data on politicians in the national
+  legislatures of almost every country in the world. But this will never be
+  complete. More countries, more kinds of data, more historic data.
+</p>  
+
+
 <a name="process"></a>
-<p>
-  Here are the three steps we follow to put a country on the
-  <a href="http://everypolitician.org/countries.html">EveryPolitician map</a>:
-</p>
+<h3>
+    A summary of the process
+</h3>
 <div class="process-boxes">
   <div class="step-0">
-    1. find the data somewhere on the web
+    1. There’s a data source somewhere on the web
     <p>
-      That might simply be finding a list of politicians on the
-      parliament’s website, or knowing of a local group that already
-      collects this data.
+      We find out about it because someone like you
+      <a href="mailto:team@everypolitician.org">tells us about it</a>.
     </p>
   </div>
   <div class="step-1">
-    2. turn that into a format we can import
+    2. We turn that into a format we can import
     <p>
-      Often that means running a scraper that gets the data off the
-      webpage and turns it into the kind of data we can easily import
-      (or, if we’re lucky, doing next to nothing because it’s already
-      in a lovely format).
+      We write a program that extracts the data into our <a
+      href="submitting.html">preferred CSV format</a>... unless you’re
+      technical and <a href="scrapers.html"><em>you</em> want to write a
+      scraper</a> for us instead.
     </p>
   </div>
   <div class="step-2">
-    3. pull it into EveryPolitician
+    3.We pull it into EveryPolitician
     <p>
-      We add it to the project by telling EveryPolitician where the
-      importable data is, and how to merge it in.
+      We do this bit. We add it by telling EveryPolitician where the importable
+      data is, and how to merge it with data from the other sources we already
+      have.
     </p>
   </div>
 </div>
 
+<h3>What is a source?</h3>
+<p>
+  We combine multiple sources for each legislature. For example, we might be
+  getting a legislature’s members' names and dates of birth  from one source
+  and their twitter handles from another. This is why we’re always interested
+  in sources which contain data we haven’t got yet.
+</p>
+<ul>
+  <li>
+    <h4>It does <em>not</em> need to be <strong>complete</strong>.</h4>
+    We combine with other sources, and inevitably we often have richer data on
+    some politicians in a legislature than others. So even if we can only get
+    email addresses or social media details for half of the members, that’s
+    better than none to start with.
+  </li>
+</ul>
+<ul>
+  <li>
+    <h4>It does <em>not</em> need to be <strong>official</strong>.</h4>
+    <em>Of course</em> we love getting data from official parliament websites
+    and APIs. But as a single source such a service will never contain
+    everything we want. Parliamentary Monitoring Organisations’ websites are
+    amongst our favourites, but useful sources can turn up all over the place.
+    Journalists’ work, political parties, local special interest groups;
+    really, there’s no limit.
+  </li>
+</ul>
+<ul>
+  <li>
+    <h4>It does <em>not</em> need to be <strong>current</strong>.</h4>
+    We collate and share historical data in exactly the same way as data about
+    today’s politicians. One of the goals of the EveryPolitician project is to
+    make it possible for people to use our data for analyses of data changes
+    over time.
+  </li>
+</ul>
+<ul>
+  <li>
+    <h4>It’s best if it is <strong>online</strong>.</h4>
+    Sometimes it won’t be (perhaps if you’ve found an archive of historic
+    data). But if that’s the case, we’d probably look for a way to put it
+    online, and then set about using it.
+  </li>
+</ul>
+<p>
+  <em>
+    The simplest way you can help is to tell us about an online source that
+    contains politicians’ data which we appear to be missing.
+  </em>
+</p>
+
+<h2>If your country is missing data</h2>
 <p>
   Have a look at the list of
   <a href="http://everypolitician.org/needed.html">countries we don’t
@@ -54,17 +156,9 @@ layout: docs
 <p>
   If a country is listed under &ldquo;<strong>Source
   needed</strong>&rdquo; then it’s still at step 1 of the process. If
-  you know where there is comprehensive poltician data for that
+  you know where there is comprehensive politician data for that
   country, please let us know!
 </p>
-<p>
-  Incidentally, there may be more than one source for a given country’s
-  data. Ideally, everything is in one place. However, things are often
-  more complicated than that, so one site might have all the
-  politician’s names and party memberships, but a different site has
-  their twitter handles. But that’s OK because we’re happy to merge
-  different sources.
-<p>
 <p>
   If a country appears under &ldquo;<strong>Scraper
   needed</strong>&rdquo; it means that we do have at least one source
@@ -78,9 +172,9 @@ layout: docs
 <p>
   If we’re very lucky the data identified in the source is already in a
   lovely format, and we can move straight to step 3. That’s very rare,
-  though, so normally the data will need to be taken off the web pages
-  it’s on and turned into easy-to-import data. That’s what the scrapers
-  do, and we basically have one for every country whose data is in
+  though, so normally the data will need to be taken off the web pages it’s on
+  and turned into easy-to-import data. That’s what the scrapers do, and we
+  effectively have at least one for every country whose data is in
   EveryPolitician.
 </p>
 <p>
@@ -91,45 +185,24 @@ layout: docs
   easier &mdash; and more fun! &mdash; than you think).
 </p>
 <p>
-  Once the data’s in a suitable format, we’ll add it to
-  EveryPolitician’s list of scrapers (what this really means is making
-  the Rake tasks aware of where to get the formatted data, and how to
-  merge it all together). That’s step 3 and we’ll take care of that for
-  you.
-</p>
-<p>
-  In summary, if you:
-</p>
-<ul>
-  <li>
-    know where there’s a missing source for a country we’re currently lacking
-  </li>
-  <li>
-    have some or all of the data we’re looking for, or can put us in
-    touch with a group who has it, or even just know where we can find
-    it in a reasonably well-structured form
-  </li>
-  <li>
-    or want to write a scraper for one of the countries we haven’t done yet
-  </li>
-</ul>
-<p>
-  ...then please send an email to
-  <a
-  href="mailto:team@everypolitician.org">team@everypolitician.org</a>
-  and tell us!
+  Once the data’s in a suitable format, we’ll add it to the instructions
+  EveryPolitician follows to combine incoming data. That’s step 3 and we’ll
+  take care of that for you.
 </p>
 
 <h2>If you see an error in the data</h2>
-
-<p>Found something incorrect in the data we’re currently displaying on the site?</p>
-
-<p>We’re working on building tools to let you edit the data directly,
-but in the meantime, if you see an error that should be corrected,
-email us at <a href="mailto:team@everypolitician.org">team@everypolitician.org</a>.</p>
-
-<p>Please include evidence for your proposed change — a link to an
-official source, where possible.</p>
+<p>
+  Found something incorrect in the data we’re currently displaying on the site?
+</p>
+<p>
+  We’re working on building tools to let you edit the data directly, but in the
+  meantime, if you see an error that should be corrected, email us at <a
+  href="mailto:team@everypolitician.org">team@everypolitician.org</a>.
+</p>
+<p>
+  Please include evidence for your proposed change such as a link to an
+  official or credible source.
+</p>
 
 <h2>If there are gaps in the data</h2>
 
