@@ -47,7 +47,7 @@ layout: docs
   details about using this crucial file.
 </p>
 <h2>
-  Three approaches to getting the data
+  Four approaches to getting the data
 </h2>
 <p>
   You’re going to write the code. All you need is the data.
@@ -61,10 +61,29 @@ layout: docs
   need:
 </p>
 <ul>
+  <li><a href="#use-the-library">use the library</a></li>
   <li><a href="#download-it-once">download it once, never worry again</a></li>
   <li><a href="#download-it-again">download it periodically</a></li>
   <li><a href="#download-triggered-by-event">download it whenever it changes: event-driven</a></li>
 </ul>
+<a name="use-the-library"></a>
+<h3>
+  Use the library (<code>everypolitician-ruby</code> gem)
+</h3>
+<p>
+  If you're a programmer and you just want to use the data, use 
+  <a href="https://github.com/everypolitician/everypolitician-ruby">the
+  Ruby gem</a>. It gets the latest data for you, and you don't have to spare
+  a moment wondering about file formats.
+</p>
+<p>
+  In fact the following approaches are all valid, and before you go into
+  production you should consider them too, even when you're using the library
+  (otherwise it's possibly very inefficient if you fetch the data <em>every
+  time</em>). But we want to make sure you realise how easy using the gem is.
+  It will simply <em>get the data</em> for you.
+</p>
+
 <a name="download-it-once"></a>
 <h3>
   Download it once, never worry again
