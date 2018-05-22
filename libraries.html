@@ -1,0 +1,270 @@
+---
+layout: docs
+---
+
+<h1>EveryPolitician libraries for developers</h1>
+<p class="section-intro">
+  If you want to write any code that uses EveryPolitician data,
+  the easiest, fastest way to get going is to use the libraries.
+</p>
+<p>
+  We’re ahead of you: we needed to access the EveryPolitician data,
+  so we wrote libraries. The first one we wrote was in Ruby, because that’s
+  what most of EveryPolitician is using backstage. Dogfood, we eat you. This
+  also means that we’re actively expanding the libraries as we hit things
+  it would be helpful for them to support, so keep checking for updates.
+</p>
+<p>
+  We also know that the quickest way to get started with code is to copy
+  someone else’s examples. So here they are: jump in.
+</p>
+
+<ul>
+  <li><a href="#ruby">Ruby: everypolitician gem</a></li>
+  <li><a href="#python">Python: everypolitician package</a></li>
+</ul>
+
+<h2 id="ruby" style="margin-top:2em">Ruby: everypolitician gem</h2>
+
+<h3>Installation</h3>
+<p>
+  The library code is on GitHub at
+  <a href="https://github.com/everypolitician/everypolitician-ruby">everypolitician-ruby</a>
+  but of course we’ve made it available as a gem too. The simplest way to
+  get it is to add this line to your application’s Gemfile:
+</p>
+<pre>
+gem 'everypolitician'
+</pre>
+<p>
+  And then execute:
+</p>
+<pre>
+$ bundle
+</pre>
+<p>
+  Or install it yourself as:
+</p>
+<pre>
+$ gem install everypolitician
+</pre>
+
+<h3>Example: get the Australian Senate’s data</h3>
+<pre>
+require 'everypolitician'
+
+australia = Everypolitician::Index.new.country('australia')
+australia.code # => "AU"
+senate = australia.legislature('Senate')
+senate.popolo # => #&lt;Everypolitician::Popolo::JSON&gt;
+</pre>
+<p>
+  In that example, we used the slug <code>australia</code> for Australia (and
+  also <code>Senate</code> for the Senate — slugs are case insensitive). If you
+  want to see all the slugs, you can use the gem to print them all out (see the
+  example below). You can also see them in the URLs we use on EveryPolitician’s
+  <a href="http://everypolitician.org/countries.html">country pages</a>.
+</p>
+
+<h3>Example: other countries</h3>
+<pre>
+united_kingdom = Everypolitician::Index.new.country('UK')
+house_of_commons = united_kingdom.legislature('Commons')
+
+american_samoa = Everypolitician::Index.new.country('American-Samoa')
+house_of_representatives = american_samoa.legislature('House')
+
+united_arab_emirates = Everypolitician::Index.new.country('United-Arab-Emirates')
+national_council = united_arab_emirates.legislature('Federal-National-Council')
+
+algeria = Everypolitician::Index.new.country('Algeria')
+national_assembly = algeria.legislature('Majlis')
+
+# Iterate though all known countries
+Everypolitician::Index.new.countries do |country|
+  puts "#{country.slug}: #{country.name} has #{country.legislatures.size} legislature(s)"
+end
+</pre>
+
+<p>
+  The data you get back for the legislature is available as
+  <code>Everypolitician::Popolo::JSON</code>: see the <a
+  href="https://github.com/everypolitician/everypolitician-popolo">everypolitici
+  an-popolo</a> gem for details.
+</p>
+
+<h3>Example: youngest members of each term of the UK House of Commons</h3>
+
+<p>
+  Once you’ve got the data, here’s how easy it is to start doing something
+  useful with it. This lists the youngest member of each term for the specified
+  legislature.
+</p>
+
+<pre>
+EveryPolitician::Index.new.country('UK').legislature('commons').legislative_periods.map { |t|
+  y = t.memberships.map(&:person).sort_by(&:birth_date).last
+ [t.id, t.start_date.to_s, y.gender, y.name, ((t.start_date - Date.parse(y.birth_date) / 365.0).round(1) ] 
+}
+
+# =>   term       term-start    gender    name             age
+#   [
+#     ["term/56", "2015-05-08", "female", "Mhairi Black",  20.7],
+#     ["term/55", "2010-05-06", "female", "Pamela Nash",   25.9],
+#     ["term/54", "2005-05-05", "female", "Chloe Smith",   23.0],
+#     ["term/53", "2001-06-07", "female", "Sarah Teather", 27.0],
+#     ["term/52", "1997-05-01", "male",   "David Lammy",   24.8]
+#   ]
+</pre>
+
+<p>
+  This example is for the UK’s House of Commons, but the whole point of
+  EveryPolitician data is that it’s consistent. What works for one term in one
+  legislature can work for all the others — the only limitation is if we’ve got
+  the data you need. For example, we haven’t a date of birth for <em>every</em>
+  politician... yet. But the EveryPolitician data is updated almost every day,
+  and we’re adding new sources all the time. If you know of any more, please <a
+  href="contribute.html">help us by telling us</a>.
+</p>
+
+<h3>Changing where the data is coming from</h3>
+
+<p>
+  If you don’t tell it to behave otherwise, the gem will automatically attempt
+  to fetch the most recent version of the data.
+</p>
+<p>
+  This remote fetch happens because by default the gem connects to
+  EveryPolitician (actually it’s getting the most recent version of its index,
+  <code>countries.json</code>, from RawGit’s CDN). You can override this
+  behaviour by passing an explicit <code>index_url</code> to
+  <code>Index.new</code>. Make sure you’re pointing at a valid
+  <code>countries.json</code> — see <a href="">more about
+  <code>countries.json</code></a>.
+</p>
+<p>
+  For example, if you want to use a specific snaphot of the EveryPolitician
+  data, you could lock onto a specific commit:
+</p>
+<pre>
+  Everypolitician::Index.new(index_url: 'https://cdn.rawgit.com/everypolitician/everypolitician-data/080cb46/countries.json')
+</pre>
+<p>
+  If you’ve read our advice about <a href="use_the_data.html">using the
+  data</a> you might prefer working with a local copy of the data. If so, point
+  the gem at your local file instead, using
+</p>
+<pre>
+  Everypolitician::Index.new(index_url: '../your-great-project/everypolitician-data/countries.json')
+</pre>
+<p>
+  Incidentally, if you’re working with a local copy of the data, you might find
+  the EveryPolitician <a
+  href="https://medium.com/@everypolitician/i-webhooks-pass-it-on-703e35e9ee93">
+   webhook manager</a> useful — our bot will send your application an HTTP POST
+  request whenever the data is updated.
+</p>
+
+<h2 id="python" style="margin-top:2em">Python: everypolitician package</h2>
+
+<p>
+  The library code is on GitHub at
+  <a href="https://github.com/everypolitician/everypolitician-python">everypolitician-python</a>.
+  It’s essentially a Python port of 
+  <a href="https://github.com/everypolitician/everypolitician-ruby">everypolitican-ruby</a>.
+</p>
+
+<h3>Installation</h3>
+
+<p>
+  You can install this package from PyPi with:
+</p>
+<pre>
+pip install everypolitician
+</pre>
+
+<h3>Example: get the Australian Senate’s data</h3>
+<pre>
+from everypolitician import EveryPolitician
+ep = EveryPolitician()
+
+australia = ep.country('Australia')
+senate = australia.legislature('Senate')
+senate # => &lt;Legislature: Senate in Australia&gt;
+</pre>
+
+<p>
+  In that example, we used the slug <code>australia</code> for Australia (and
+  also <code>Senate</code> for the Senate — slugs are case insensitive). If you
+  want to see all the slugs, you can use the library to print them all out (see
+  the example below). You can also see them in the URLs we use on
+  EveryPolitician’s <a href="http://everypolitician.org/countries.html">country
+  pages</a>.
+</p>
+
+<h3>Example: other countries</h3>
+<pre>
+united_kingdom = ep.country('UK')
+house_of_commons = united_kingdom.legislature('Commons')
+
+american_samoa = ep.country('American-Samoa')
+house_of_representatives = american_samoa.legislature('House')
+
+united_arab_emirates = ep.country('United-Arab-Emirates')
+national_council = united_arab_emirates.legislature('Federal-National-Council')
+
+algeria = ep.country('Algeria')
+national_assembly = algeria.legislature('Majlis')
+
+# Iterate though all known countries
+for country in ep.countries():
+    print country.slug, ':', country.name, 'has', len(country.legislatures()), 'legislature(s)'
+</pre>
+
+<p>
+Right now there’s no equivalent to the
+<a href="https://github.com/everypolitician/everypolitician-popolo">everypolitician-popolo gem</a>
+so there’s no supereasy programmatic access to the membership data using Python
+<em>yet</em>...but we’re working on that, so watch for progress.
+</p>
+
+<h3>Changing where the data is coming from</h3>
+
+<p>
+  If you don’t tell it to behave otherwise, the library will automatically
+  attempt to fetch the most recent version of the data.
+</p>
+<p>
+  This remote fetch happens because by default the library connects to
+  EveryPolitician (actually it’s getting the most recent version of its index,
+  <code>countries.json</code>, from RawGit’s CDN). You can override this
+  behaviour by specifying the <code>countries_json_url</code> keyword argument
+  when creating the <code>EveryPolitician</code> object. Make sure you’re
+  pointing at a valid <code>countries.json</code> — see <a href="">more about
+  <code>countries.json</code></a>.
+</p>
+<p>
+  For example, if you want to use a specific snaphot of the EveryPolitician
+  data, you could lock onto a specific commit:
+</p>
+<pre>
+EveryPolitician(countries_json_url='https://cdn.rawgit.com/everypolitician/everypolitician-data/080cb46/countries.json')
+</pre>
+
+<p>
+  If you’ve read our advice about <a href="use_the_data.html">using the
+  data</a> you might prefer working with a local copy of the data. If so, point
+  the library at your local file instead, using
+  <code>countries_json_<strong>filename</strong></code>:
+</p>
+<pre>
+  EveryPolitician(countries_json_filename='../your-great-project/everypolitician-data/countries.json')
+</pre>
+<p>
+  Incidentally, if you’re working with a local copy of the data, you might find
+  the EveryPolitician <a
+  href="https://medium.com/@everypolitician/i-webhooks-pass-it-on-703e35e9ee93">
+   webhook manager</a> useful — our bot will send your application an HTTP POST
+  request whenever the data is updated.
+</p>
+
